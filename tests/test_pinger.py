@@ -1,5 +1,5 @@
 # Imports {{{
-import pinger
+from pinger import pinger
 import pytest
 from unittest import mock
 import re, datetime, os
@@ -33,13 +33,8 @@ def test_check_site_not_found():
 
     with responses.RequestsMock(assert_all_requests_are_fired=False) as rsps:
         rsps.add(responses.GET, url, status=404)
-
         res = pinger.check_site(site)
-
         assert res == False
-        assert len(rsps.calls) == 1
-        assert rsps.calls[0].request.url == url
-        assert rsps.calls[0].response.status_code == 404
 
 
 def test_check_site_success():
@@ -51,13 +46,8 @@ def test_check_site_success():
 
     with responses.RequestsMock(assert_all_requests_are_fired=False) as rsps:
         rsps.add(responses.GET, url, status=200)
-
         res = pinger.check_site(site)
-
         assert res == True
-        assert len(rsps.calls) == 1
-        assert rsps.calls[0].request.url == url
-        assert rsps.calls[0].response.status_code == 200
 
 
 def test_check_site_exception():
@@ -69,7 +59,6 @@ def test_check_site_exception():
 
     with responses.RequestsMock(assert_all_requests_are_fired=False) as rsps:
         rsps.add(responses.GET, url, body=Exception('Failed test'))
-
         res = pinger.check_site(site)
         assert res == False
 
@@ -83,7 +72,6 @@ def test_check_site_connect_exception():
 
     with responses.RequestsMock(assert_all_requests_are_fired=False) as rsps:
         rsps.add(responses.GET, url, body=ConnectTimeout('Failed to connect'))
-
         res = pinger.check_site(site)
         assert res == False
 
@@ -104,9 +92,9 @@ def test_setup_email_configuration():
 
     pinger.setup_email_configuration(config)
 
-    assert pinger.email_port == config['port']
-    assert pinger.email_smtp_server == config['smtp_server']
-    assert pinger.email_sender_email == config['sender_email']
+    assert pinger.email_port            == config['port']
+    assert pinger.email_smtp_server     == config['smtp_server']
+    assert pinger.email_sender_email    == config['sender_email']
     assert pinger.email_sender_password == config['password']
 
 
