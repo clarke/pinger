@@ -22,8 +22,8 @@ class StatusCodeException(Exception):
     pass
 # }}}
 
-def get_configuration():
-    with open(Path(os.path.expanduser('~/.pinger.conf'))) as f:
+def get_configuration(): # pragma: no cover
+    with open(Path(os.path.expanduser(configuration_file))) as f:
         conf = yaml.load(f, Loader=yaml.FullLoader)
     return conf
 
@@ -52,14 +52,14 @@ def check_site(site):
         print(f"Exception occurred: {e}")
         return False
 
-def send_email(message, recipient):
+def send_email(message, recipient): # pragma: no cover
 	context = ssl.create_default_context()
 	with smtplib.SMTP(email_smtp_server, email_port) as server:
 		server.starttls(context=context)
 		server.login(email_sender_email, email_sender_password)
 		server.sendmail(email_sender_email, recipient, message)
 
-if __name__ == "__main__": # {{{
+if __name__ == "__main__": # {{{ # pragma: no cover
     configuration = get_configuration()
 
     setup_email_configuration(configuration['email'])
