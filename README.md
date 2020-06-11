@@ -1,4 +1,4 @@
-![Python application](https://github.com/clarke/pinger/workflows/Python%20application/badge.svg)
+![pinger](https://github.com/clarke/pinger/workflows/Python%20application/badge.svg)
 
 # pinger
 
