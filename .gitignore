@@ -2,3 +2,5 @@
 __pycache__/
 cov.xml
 htmlcov/
+build/
+pinger.egg-info/
