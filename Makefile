@@ -6,3 +6,9 @@ setup:
 
 test:
 	python3 -m pytest --cov=pinger --cov-report=xml:cov.xml --cov-report=html:htmlcov tests/test_*.py
+
+build:
+	python3 setup.py build
+
+clean:
+	python3 setup.py clean
