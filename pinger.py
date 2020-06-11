@@ -47,7 +47,7 @@ def check_site(site):
             return False
         return True
     except requests.exceptions.ConnectTimeout as cte:
-        print(f"Connection timeout for {site['url']}")
+        return False
     except Exception as e:
         print(f"Exception occurred: {e}")
         return False
@@ -79,9 +79,6 @@ if __name__ == "__main__": # {{{
                 """
                 for email in site_config['email_recipients']:
                     send_email(msg, email)
-            else:
-                # print(f"Successful check for {site}")
-                pass
 # }}}
 
 # vim: foldmethod=marker foldlevel=0
