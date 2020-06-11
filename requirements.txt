@@ -1,2 +1,4 @@
 requests
+responses
 pyyaml
+pytest
