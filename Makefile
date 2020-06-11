@@ -1,5 +1,5 @@
 run:
-	python3 ./pinger.py
+	python3 ./pinger_runner.py
 
 setup:
 	python3 -m pip install -r requirements.txt
