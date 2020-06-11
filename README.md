@@ -1,4 +1,4 @@
-![build status](https://github.com/<OWNER>/<REPOSITORY>/workflows/<WORKFLOW_NAME>/badge.svg)
+![Python application](https://github.com/clarke/pinger/workflows/Python%20application/badge.svg)
 
 # pinger
 
