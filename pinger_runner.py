@@ -2,7 +2,7 @@
 
 # Imports {{{
 import datetime
-from pinger import pinger
+from pinger import pinger, mailer, configurator
 import argparse
 # }}}
 
@@ -26,9 +26,9 @@ if __name__ == "__main__": # {{{
         print(f"Dry run: {args.dry_run}")
         print(f"Config: {args.config}")
 
-    configuration = pinger.get_configuration(args.config)
+    configuration = configurator.get_configuration(args.config)
 
-    pinger.setup_email_configuration(configuration['email'])
+    mailer.setup_email_configuration(configuration['email'])
 
     for site in configuration['sites'].keys():
         if args.debug:
@@ -54,7 +54,7 @@ if __name__ == "__main__": # {{{
                     for email in site_config['email_recipients']:
                         if args.debug:
                             print(f"Sending alert for {site} to {email}")
-                        pinger.send_email(msg, email)
+                        mailer.send_email(msg, email)
         else:
             print(f"Site {site} is not enabled. Skipping.")
 # }}}

@@ -1,5 +1,5 @@
 # Imports {{{
-from pinger import pinger
+from pinger import pinger, mailer, configurator
 import pytest
 from unittest import mock
 import re, datetime, os
@@ -22,7 +22,7 @@ def teardown_function():
 
 # }}}
 
-# Tests {{{
+# Site Check Tests {{{
 def test_check_site_not_found():
     url = 'https://fake.url/'
 
@@ -74,8 +74,9 @@ def test_check_site_connect_exception():
         rsps.add(responses.GET, url, body=ConnectTimeout('Failed to connect'))
         res = pinger.check_site(site)
         assert res == False
+# }}}
 
-
+# Email Tests {{{
 def test_setup_email_configuration():
     config = {
         'port': 123,
@@ -85,20 +86,17 @@ def test_setup_email_configuration():
     }
 
     # Make sure they are None'd out first
-    assert pinger.email_port            == None
-    assert pinger.email_smtp_server     == None
-    assert pinger.email_sender_email    == None
-    assert pinger.email_sender_password == None
+    assert mailer.email_port            == None
+    assert mailer.email_smtp_server     == None
+    assert mailer.email_sender_email    == None
+    assert mailer.email_sender_password == None
 
-    pinger.setup_email_configuration(config)
+    mailer.setup_email_configuration(config)
 
-    assert pinger.email_port            == config['port']
-    assert pinger.email_smtp_server     == config['smtp_server']
-    assert pinger.email_sender_email    == config['sender_email']
-    assert pinger.email_sender_password == config['password']
-
-
-
+    assert mailer.email_port            == config['port']
+    assert mailer.email_smtp_server     == config['smtp_server']
+    assert mailer.email_sender_email    == config['sender_email']
+    assert mailer.email_sender_password == config['password']
 # }}}
 
 
