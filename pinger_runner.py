@@ -34,7 +34,7 @@ Timeout: {site['timeout']}
 
 def check_all_sites(sites, max_thread_workers): # {{{
     with concurrent.futures.ThreadPoolExecutor(max_workers=max_thread_workers) as executor:
-        executor.map(check_site, sites)
+        executor.map(check_site, sites, timeout=30)
 # }}}
 
 if __name__ == "__main__": # {{{
@@ -85,12 +85,12 @@ if __name__ == "__main__": # {{{
 
     if args.debug:
         site_labels = [site['label'] for site in sites]
-        print(f"Checking sites: {', '.join(site_labels)}")
+        print(f"Enabled sites: {', '.join(site_labels)}")
 
         skipped_sites = [site for site in configuration['sites'] if site['enabled'] == 0]
         if len(skipped_sites) > 0:
             skipped_site_labels = [site['label'] for site in skipped_sites]
-            print(f"Skipping disabled sites: {', '.join(skipped_site_labels)}")
+            print(f"Disabled sites: {', '.join(skipped_site_labels)}")
 
     if args.timer:
         start_time = time.time()
