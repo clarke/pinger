@@ -55,4 +55,3 @@ def test_send_email(smtp):
     #                                      mailer.email_sender_password)
     # smtp.sendmail.assert_called_with(mailer.email_sender_email,
     #                                         recipient, message)
-
