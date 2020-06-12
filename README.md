@@ -65,4 +65,26 @@ There is a make command to install dependencies:
 
 Running checks can be accomplished by:
 
-`$ make run`
+`$ ./pinger_runner.py`
+
+### Help
+
+```
+$ ./pinger_runner.py -h
+
+usage: pinger_runner.py [-h] [-d] [-n] [-t] [-c CONFIG]
+                        [-w MAX_THREAD_WORKERS]
+
+Process some integers.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d, --debug           turn on debug mode
+  -n, --dry_run         show what steps would take place, but don't actually
+                        do them.
+  -t, --timer           time the run
+  -c CONFIG, --config CONFIG
+                        specify a configuration file
+  -w MAX_THREAD_WORKERS, --max_thread_workers MAX_THREAD_WORKERS
+                        Set the maximum number of worker threads
+```
