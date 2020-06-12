@@ -14,25 +14,29 @@ Example configuration:
 
 ```
 ---
+runner:
+    max_thread_workers: 8
 email:
     port: 587
     smtp_server: smtp.gmail.com
     sender_email: user-account@gmail.com
     password: application-specific-password
 sites:
-    google:
-      email_recipients:
-      - user@example.com
-      timeout: 0.1
-      url: https://google.com
-      enabled: 1
-    yahoo:
-      email_recipients:
-      - foo@bar.com
-      timeout: 1
-      url: https://yahoo.com
-      enabled: 0
+- label: google
+  email_recipients:
+  - user@example.com
+  timeout: 0.1
+  url: https://google.com
+  enabled: 1
+- label: yahoo
+  email_recipients:
+  - foo@bar.com
+  timeout: 1
+  url: https://yahoo.com
+  enabled: 0
 ```
+
+Note: The default max_thread_workers is 5.
 
 ### Email
 
