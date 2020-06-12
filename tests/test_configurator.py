@@ -1,5 +1,5 @@
 # Imports {{{
-from pinger import configurator
+from pinger import pinger, mailer, configurator
 import pytest
 from unittest import mock
 import yaml
