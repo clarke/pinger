@@ -53,7 +53,7 @@ if __name__ == "__main__": # {{{
     parser.add_argument('-c', '--config', default='~/.pinger.conf',
                                           help='specify a configuration file')
     parser.add_argument('-w', '--max_thread_workers', type=int,
-                        help='Set the maximum number of worker threads')
+                        help='set the maximum number of worker threads')
     args = parser.parse_args()
 
     if args.debug:

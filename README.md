@@ -86,5 +86,5 @@ optional arguments:
   -c CONFIG, --config CONFIG
                         specify a configuration file
   -w MAX_THREAD_WORKERS, --max_thread_workers MAX_THREAD_WORKERS
-                        Set the maximum number of worker threads
+                        set the maximum number of worker threads
 ```
