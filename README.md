@@ -1,4 +1,4 @@
-![pinger](https://github.com/clarke/pinger/workflows/pinger/badge.svg)
+![pinger](https://github.com/clarke/pinger/workflows/pinger/badge.svg) [![codecov](https://codecov.io/gh/clarke/pinger/branch/master/graph/badge.svg)](https://codecov.io/gh/clarke/pinger)
 
 # pinger
 
