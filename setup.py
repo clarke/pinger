@@ -10,7 +10,7 @@ with open(os.path.join(HERE, "README.md")) as f:
 
 setup(
     name                          = 'pinger',
-    version                       = '1.0.0',
+    version                       = '1.0.1',
     description                   = "Check to see if a website is reachable.",
     long_description              = README,
     long_description_content_type = 'text/markdown',
@@ -30,6 +30,6 @@ setup(
         'pyyaml',
     ],
     entry_points = {
-        "console_scripts": ['pinger=pinger_runner.__main__:main']
+        "console_scripts": ['pinger=pinger.runner:run_checks']
     },
 )

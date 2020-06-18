@@ -12,3 +12,7 @@ build:
 
 clean:
 	python3 setup.py clean
+	rm -rf build pinger.egg-info dist
+
+install:
+	python3 setup.py install

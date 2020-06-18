@@ -4,3 +4,4 @@ cov.xml
 htmlcov/
 build/
 pinger.egg-info/
+dist/
