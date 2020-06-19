@@ -2,3 +2,4 @@ requests
 responses
 pyyaml
 pytest
+flake8

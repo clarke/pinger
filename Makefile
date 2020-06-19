@@ -16,3 +16,6 @@ clean:
 
 install:
 	python3 setup.py install
+
+lint:
+	flake8 pinger tests

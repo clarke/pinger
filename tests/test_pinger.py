@@ -1,15 +1,8 @@
-# Imports {{{
 from pinger import pinger
-import pytest
-from unittest import mock
-import re, datetime, os
-import requests
 import responses
-import yaml
 from requests.exceptions import ConnectTimeout
-# }}}
 
-# Site Check Tests {{{
+
 def test_check_site_not_found():
     url = 'https://fake.url/'
 
@@ -21,7 +14,7 @@ def test_check_site_not_found():
     with responses.RequestsMock(assert_all_requests_are_fired=False) as rsps:
         rsps.add(responses.GET, url, status=404)
         res = pinger.check_site(site)
-        assert res == False
+        assert res is False
 
 
 def test_check_site_success():
@@ -34,7 +27,7 @@ def test_check_site_success():
     with responses.RequestsMock(assert_all_requests_are_fired=False) as rsps:
         rsps.add(responses.GET, url, status=200)
         res = pinger.check_site(site)
-        assert res == True
+        assert res is True
 
 
 def test_check_site_exception():
@@ -47,7 +40,7 @@ def test_check_site_exception():
     with responses.RequestsMock(assert_all_requests_are_fired=False) as rsps:
         rsps.add(responses.GET, url, body=Exception('Failed test'))
         res = pinger.check_site(site)
-        assert res == False
+        assert res is False
 
 
 def test_check_site_connect_exception():
@@ -60,8 +53,4 @@ def test_check_site_connect_exception():
     with responses.RequestsMock(assert_all_requests_are_fired=False) as rsps:
         rsps.add(responses.GET, url, body=ConnectTimeout('Failed to connect'))
         res = pinger.check_site(site)
-        assert res == False
-# }}}
-
-
-# vim: foldmethod=marker foldlevel=0
+        assert res is False

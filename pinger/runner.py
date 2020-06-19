@@ -5,9 +5,9 @@ from pinger import pinger, mailer, configurator
 import argparse
 import time
 import concurrent.futures
-import threading
 
 args = None
+
 
 def check_site(site):
     if args.debug:
@@ -31,27 +31,33 @@ Timeout: {site['timeout']}
                 print(f"Sending alert for {site['label']} to {email}")
             mailer.send_email(msg, email)
 
-def check_all_sites(sites, max_thread_workers):
-    with concurrent.futures.ThreadPoolExecutor(max_workers=max_thread_workers) as executor:
+
+def check_all_sites(sites, mtw):
+    with concurrent.futures.ThreadPoolExecutor(max_workers=mtw) as executor:
         executor.map(check_site, sites, timeout=30)
+
 
 def run_checks():
     global args
 
-    configuration_file = '~/.pinger.conf'
-
     parser = argparse.ArgumentParser(description='Process some integers.')
-    parser.add_argument('-d', '--debug', default=False,
-                                         action="store_true",
-                                         help='turn on debug mode')
-    parser.add_argument('-n', '--dry_run', default=False,
-                                           action="store_true",
-                                           help='show what steps would take place, but don\'t actually do them.')
-    parser.add_argument('-t', '--timer', default=False,
-                                           action="store_true",
-                                           help='time the run')
-    parser.add_argument('-c', '--config', default='~/.pinger.conf',
-                                          help='specify a configuration file')
+    parser.add_argument('-d',
+                        '--debug',
+                        default=False,
+                        action="store_true",
+                        help='turn on debug mode')
+    parser.add_argument('-n', '--dry_run',
+                        default=False,
+                        action="store_true",
+                        help='show what steps would take place, but don\'t ' +
+                        'actually do them.')
+    parser.add_argument('-t', '--timer',
+                        default=False,
+                        action="store_true",
+                        help='time the run')
+    parser.add_argument('-c', '--config',
+                        default='~/.pinger.conf',
+                        help='specify a configuration file')
     parser.add_argument('-w', '--max_thread_workers', type=int,
                         help='set the maximum number of worker threads')
     args = parser.parse_args()
@@ -70,11 +76,11 @@ def run_checks():
     # 3. Default value (5)
     if args.max_thread_workers is not None:
         max_thread_workers = args.max_thread_workers
-    elif configuration.get('runner') and configuration.get('runner').get('max_thread_workers'):
+    elif (configuration.get('runner') and
+          configuration.get('runner').get('max_thread_workers')):
         max_thread_workers = configuration['runner']['max_thread_workers']
     else:
         max_thread_workers = 5
-
 
     if args.debug:
         print(f"Maximum thread workers: {max_thread_workers}")
@@ -87,7 +93,8 @@ def run_checks():
         site_labels = [site['label'] for site in sites]
         print(f"Enabled sites: {', '.join(site_labels)}")
 
-        skipped_sites = [site for site in configuration['sites'] if site['enabled'] == 0]
+        skipped_sites = [site for site in
+                         configuration['sites'] if site['enabled'] == 0]
         if len(skipped_sites) > 0:
             skipped_site_labels = [site['label'] for site in skipped_sites]
             print(f"Disabled sites: {', '.join(skipped_site_labels)}")

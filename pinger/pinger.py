@@ -1,6 +1,5 @@
-# Imports {{{
 import requests
-# }}}
+
 
 def check_site(site):
     try:
@@ -8,9 +7,5 @@ def check_site(site):
         if res.status_code != 200:
             return False
         return True
-    except requests.exceptions.ConnectTimeout as cte:
+    except Exception:
         return False
-    except Exception as e:
-        return False
-
-# vim: foldmethod=marker foldlevel=0
