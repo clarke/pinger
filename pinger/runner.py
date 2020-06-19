@@ -7,6 +7,8 @@ import time
 import concurrent.futures
 import threading
 
+args = None
+
 def check_site(site):
     if args.debug:
         print(f"Checking site {site}")
@@ -34,6 +36,8 @@ def check_all_sites(sites, max_thread_workers):
         executor.map(check_site, sites, timeout=30)
 
 def run_checks():
+    global args
+
     configuration_file = '~/.pinger.conf'
 
     parser = argparse.ArgumentParser(description='Process some integers.')
