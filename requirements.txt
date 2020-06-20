@@ -1,5 +1,5 @@
-requests
-responses
-pyyaml
-pytest
-flake8
+requests==2.23.0
+responses==0.10.14
+pytest==5.4.1
+pytest-cov==2.9.0
+flake8==3.8.3
