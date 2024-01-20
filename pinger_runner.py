@@ -3,4 +3,3 @@
 import pinger.runner
 
 pinger.runner.run_checks()
-
